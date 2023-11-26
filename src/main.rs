@@ -10,6 +10,7 @@ use env_logger::{Builder, Env};
 use log::{info, LevelFilter};
 
 mod database;
+mod router;
 
 #[tokio::main]
 async fn main() {
@@ -40,5 +41,9 @@ async fn main() {
     let addr = SocketAddr::from(([127, 0, 0, 1], port));
 
     info!("starting server on {addr}");
-    
+
+    axum::Server::bind(&addr)
+        .serve(router::get_routes().into_make_service())
+        .await
+        .expect("could not start axum server");
 }
