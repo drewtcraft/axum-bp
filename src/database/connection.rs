@@ -5,7 +5,7 @@ use std::env;
 use super::utils::{run_database_migrations, log_existing_tables};
 
 pub async fn connect() -> PgPool {
-    let database_url = env::var("POSTGRES_URL").expect("could not load database url");
+    let database_url = env::var("POSTGRES_URL").expect("could not load POSTGRES_URL from environment");
 
     ensure_database(&database_url).await;
     let db_pool = get_database_connection(&database_url).await;
