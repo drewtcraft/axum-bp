@@ -1,8 +1,16 @@
+#![allow(dead_code)]
+// use axum;
+// use std::env;
+// use std::net::SocketAddr;
+
 use dotenv::dotenv;
 use env_logger::{Builder, Env};
 use log::{info, LevelFilter};
 
-fn main() {
+mod database;
+
+#[tokio::main]
+async fn main() {
     dotenv().expect("secrets file could not be loaded");
 
     info!(".env file loaded.");
@@ -15,5 +23,6 @@ fn main() {
         .init();
 
     info!("Logger initialized.");
-    info!("Server starting up!");
+
+    let state = database::connection::connect();
 }
