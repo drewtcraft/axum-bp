@@ -18,9 +18,8 @@ pub async fn run_database_migrations(db_pool: &PgPool) {
 pub async fn log_existing_tables(db_pool: &PgPool) {
     let result = sqlx::query(
         "SELECT table_name
-FROM information_schema.tables
-WHERE table_schema = 'public' AND table_type = 'BASE TABLE';
-",
+        FROM information_schema.tables
+        WHERE table_schema = 'public' AND table_type = 'BASE TABLE';",
     )
     .fetch_all(db_pool)
     .await;
