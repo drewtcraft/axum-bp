@@ -24,5 +24,7 @@ async fn main() {
 
     info!("Logger initialized.");
 
-    let state = database::connection::connect();
+    let state = database::connection::connect().await;
+
+    info!("database connected!")
 }
